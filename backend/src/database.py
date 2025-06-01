@@ -9,7 +9,6 @@ load_dotenv(dotenv_path=dotenv_path)
 
 DB_USERNAME = os.getenv('DB_USERNAME')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
-TESTTOKEN = os.getenv('TESTING_APIKEY')
 
 url_object = URL.create(
     "postgresql+asyncpg",
@@ -19,6 +18,5 @@ url_object = URL.create(
     port=5432,
     database="ztn_visualizer_db",
 )
-
 
 engine = create_async_engine(url_object)

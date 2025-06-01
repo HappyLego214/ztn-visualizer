@@ -17,7 +17,7 @@ TESTTOKEN = os.getenv('TESTING_APIKEY')
 async def root():
 
     async with engine.connect() as conn:
-        result = await conn.execute(text("SELECT 'Hello World!'"))
+        result = await conn.execute(text("SELECT * FROM USERS"))
         print(result.all())
 
     url = "https://api.zerotier.com/api/v1/network/a84ac5c10a7e5fd1/member/129d40c7e4"
