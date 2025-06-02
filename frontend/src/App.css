@@ -1,0 +1,59 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div {
+  border: 1px solid black;
+  padding: 0px;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 100vh repeat(8, 100vh);
+}
+
+.page {
+  display: flex;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+}
+
+.left-navbar-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding-left: 25px;
+}
+
+.right-navbar-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  padding-right: 25px;
+  align-items: center;
+}
+
+.site-navigation {
+  display: flex;
+  gap: 25px;
+}
