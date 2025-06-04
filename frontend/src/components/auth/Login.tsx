@@ -1,15 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { type isPasswordProps } from "../Interfaces";
 
 const Login = () => {
-  const [passwordCheck, setPasswordCheck] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  function handleCheck() {
-    if (passwordCheck) {
-      setPasswordCheck(false);
-    } else {
-      setPasswordCheck(true);
-    }
+  function togglePasswordVisibility() {
+    if (passwordVisible) {
+      setPasswordVisible(false);
+    } else setPasswordVisible(true);
   }
 
   return (
@@ -18,30 +17,57 @@ const Login = () => {
         <div className="login-title">
           <h2>Sign in</h2>
         </div>
-        <div className="login-subtitle">
+        <div className="login-email-subtitle">
           <p>New user?</p>
           <p>Create an account</p>
         </div>
       </div>
-      <div className="login-entry">
-        {passwordCheck ? (
-          <div className="login-email">
-            <label>Enter Password</label>
-            <input></input>
-            <div className="login-submit-container">
-              <button onClick={handleCheck}>Submit</button>
+      <form className="login-entry">
+        <div className="login-inputs">
+          <label>Email Address</label>
+          <input name="email" type="email"></input>
+        </div>
+        <div className="login-inputs">
+          <label>Password</label>
+          <div className="password-container">
+            {passwordVisible ? (
+              <>
+                <input name="password" type="text"></input>
+                <span
+                  className="material-symbols-outlined"
+                  onClick={togglePasswordVisibility}
+                >
+                  visibility
+                </span>
+              </>
+            ) : (
+              <>
+                <input name="password" type="password"></input>
+                <span
+                  onClick={togglePasswordVisibility}
+                  className="material-symbols-outlined"
+                >
+                  visibility_off
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="login-options-container">
+          <div className="login-options">
+            <div className="login-signedin-container">
+              <input type="checkbox"></input>
+              <label>Stay signed in</label>
+            </div>
+            <div className="login-forget-container">
+              <p>Reset your password</p>
             </div>
           </div>
-        ) : (
-          <div className="login-email">
-            <label>Email Address</label>
-            <input></input>
-            <div className="login-submit-container">
-              <button onClick={handleCheck}>Continue</button>
-            </div>
+          <div className="login-submit-container">
+            <button type="submit">Continue</button>
           </div>
-        )}
-      </div>
+        </div>
+      </form>
       <div className="login-options"></div>
     </div>
   );

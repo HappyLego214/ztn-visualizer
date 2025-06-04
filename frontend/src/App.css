@@ -1,3 +1,7 @@
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -81,9 +85,9 @@ div {
 .auth-box {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 70%;
-  width: 70%;
-  border-radius: 100px 15px 15px 15px;
+  height: 80%;
+  width: 80%;
+  min-width: min-content;
 }
 
 .auth-form {
@@ -101,7 +105,7 @@ div {
 
 .login-form {
   display: grid;
-  grid-template-rows: 0.3fr 0.7fr 1fr;
+  grid-template-rows: 0.5fr 0.5fr 1fr;
   height: 100%;
   margin: 30px;
 }
@@ -109,31 +113,53 @@ div {
 .login-title-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
-.login-subtitle {
+.login-email-subtitle {
   display: flex;
+  margin-bottom: 30px;
   gap: 5px;
 }
 
 .login-entry {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
+  gap: 5px;
 }
 
-.login-email {
+.login-inputs {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 5px;
 }
 
-.login-email label {
+.password-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.password-container input {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.password-container span {
+  user-select: none;
+  cursor: pointer;
+  grid-column: 2;
+  grid-row: 1;
+  padding: 0 8px;
+  z-index: 1;
+}
+
+.login-inputs label {
   font-size: 14px;
 }
 
-.login-email input {
+.login-inputs input {
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -144,9 +170,56 @@ div {
 .login-submit-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 5px;
+}
+
+.login-options {
+  font-size: 13px;
 }
 
 .login-submit-container button {
-  padding: 5px 15px 5px 15px;
+  height: 30px;
+  padding: 0px 25px 0px 25px;
+}
+
+.login-signedin-container {
+  display: flex;
+}
+
+.login-password-subtitle {
+  display: flex;
+  gap: 5px;
+}
+
+.login-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-options-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
+}
+
+.login-profile-picture {
+  background-color: black;
+  border-radius: 8px;
+}
+
+.login-profile-picture span {
+  font-size: 60px;
+  color: white;
+}
+
+.login-user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-user-details p {
+  font-size: 12px;
+  color: grey;
 }
