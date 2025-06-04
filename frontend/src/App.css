@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
 div {
   border: 1px solid black;
   padding: 0px;
@@ -20,8 +28,13 @@ div {
 
 .main-container {
   display: grid;
+  grid-template-rows: 1fr;
+}
+
+.homepage-container {
+  display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 100vh repeat(8, 100vh);
+  grid-template-rows: 50px 93vh repeat(3, 100vh);
 }
 
 .page {
@@ -56,4 +69,84 @@ div {
 .site-navigation {
   display: flex;
   gap: 25px;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 70%;
+  width: 70%;
+  border-radius: 100px 15px 15px 15px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px 15px 15px 0px;
+}
+
+.logo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px 0px 0px 15px;
+}
+
+.login-form {
+  display: grid;
+  grid-template-rows: 0.3fr 0.7fr 1fr;
+  height: 100%;
+  margin: 30px;
+}
+
+.login-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.login-subtitle {
+  display: flex;
+  gap: 5px;
+}
+
+.login-entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-email {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.login-email label {
+  font-size: 14px;
+}
+
+.login-email input {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  padding: 5px;
+}
+
+.login-submit-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.login-submit-container button {
+  padding: 5px 15px 5px 15px;
 }
