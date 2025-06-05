@@ -1,14 +1,28 @@
 import os
 import requests
 import uvicorn
-from fastapi import FastAPI
+from typing import Annotated
+from fastapi import FastAPI, Form
 from dotenv import load_dotenv
 from pathlib import Path
 from sqlalchemy import text
 from database import engine
+from fastapi.middleware.cors import CORSMiddleware
 
 dotenv_path = Path(__file__).parent.parent / '.env'
 app = FastAPI()
+
+origins = [
+    "http://localhost:5174",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 load_dotenv(dotenv_path=dotenv_path)
 TESTTOKEN = os.getenv('TESTING_APIKEY')
@@ -29,6 +43,9 @@ async def root():
     response = requests.get(url, headers=headers)
     return {"message": f"{response.json()}"}
 
+@app.post("/test/")
+async def testing(email: Annotated[str, Form()], password: Annotated[str, Form()]):
+    return {"email;": email, "password": password}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
