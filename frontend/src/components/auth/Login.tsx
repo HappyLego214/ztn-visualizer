@@ -1,18 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { type isPasswordProps } from "../Interfaces";
+import { useState } from "react";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   function togglePasswordVisibility() {
-    if (passwordVisible) {
-      setPasswordVisible(false);
-    } else setPasswordVisible(true);
+    setPasswordVisible((prev) => !prev);
   }
 
   return (
-    <div className="login-form">
+    <div className="login-form-container">
       <div className="login-title-container">
         <div className="login-title">
           <h2>Sign in</h2>
@@ -22,7 +19,7 @@ const Login = () => {
           <p>Create an account</p>
         </div>
       </div>
-      <form className="login-entry">
+      <form id="login-form" className="login-entry">
         <div className="login-inputs">
           <label>Email Address</label>
           <input name="email" type="email"></input>

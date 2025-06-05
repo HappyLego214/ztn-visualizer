@@ -103,7 +103,7 @@ div {
   border-radius: 100px 0px 0px 15px;
 }
 
-.login-form {
+.login-form-container {
   display: grid;
   grid-template-rows: 0.5fr 0.5fr 1fr;
   height: 100%;
