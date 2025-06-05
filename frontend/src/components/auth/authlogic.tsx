@@ -1,11 +1,10 @@
 const form = document.getElementById("login-form");
 
-async function sendLoginData(form: HTMLFormElement) {
-  const formData = new FormData(form);
+export async function sendLoginData(form: FormData) {
   try {
     const response = await fetch("", {
       method: "POST",
-      body: formData,
+      body: form,
     });
     console.log(await response.json());
   } catch (e) {
@@ -15,4 +14,5 @@ async function sendLoginData(form: HTMLFormElement) {
 
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
+  console.log(e);
 });

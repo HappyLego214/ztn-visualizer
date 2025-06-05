@@ -1,11 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { sendLoginData } from "./authlogic";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   function togglePasswordVisibility() {
     setPasswordVisible((prev) => !prev);
+  }
+
+  async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await sendLoginData(formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -19,7 +31,11 @@ const Login = () => {
           <p>Create an account</p>
         </div>
       </div>
-      <form id="login-form" className="login-entry">
+      <form
+        id="login-form"
+        className="login-entry"
+        onSubmit={handleLoginSubmit}
+      >
         <div className="login-inputs">
           <label>Email Address</label>
           <input name="email" type="email"></input>
