@@ -29,7 +29,6 @@ TESTTOKEN = os.getenv('TESTING_APIKEY')
 
 @app.get("/")
 async def root():
-
     async with engine.connect() as conn:
         result = await conn.execute(text("SELECT * FROM USERS"))
         print(result.all())
@@ -43,8 +42,13 @@ async def root():
     response = requests.get(url, headers=headers)
     return {"message": f"{response.json()}"}
 
-@app.post("/test/")
-async def testing(email: Annotated[str, Form()], password: Annotated[str, Form()]):
+@app.post("/login/")
+async def login(email: Annotated[str, Form()], password: Annotated[str, Form()]):
+    return {"email;": email, "password": password}
+
+
+@app.post("/login/")
+async def register(email: Annotated[str, Form()], password: Annotated[str, Form()]):
     return {"email;": email, "password": password}
 
 if __name__ == "__main__":
