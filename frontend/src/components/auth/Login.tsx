@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { sendLoginData } from "./authlogic";
+import AuthContainer from "./AuthContainer";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const Login = () => {
     <div className="login-form-container">
       <div className="login-title-container">
         <div className="login-title">
-          <h2>Sign in</h2>
+          <h1>Sign in</h1>
         </div>
         <div className="login-email-subtitle">
           <p>New user?</p>

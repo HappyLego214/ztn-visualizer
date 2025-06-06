@@ -105,7 +105,7 @@ div {
 
 .login-form-container {
   display: grid;
-  grid-template-rows: 0.5fr 0.5fr 1fr;
+  grid-template-rows: 0.8fr 0.5fr 0.8fr;
   height: 100%;
   margin: 30px;
 }
@@ -113,7 +113,7 @@ div {
 .login-title-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .login-email-subtitle {
@@ -222,4 +222,69 @@ div {
 .login-user-details p {
   font-size: 12px;
   color: grey;
+}
+
+.register-form-container {
+  display: grid;
+  grid-template-rows: 0.7fr 0.7fr 3fr;
+  height: 100%;
+  margin: 30px;
+}
+
+.register-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.register-providers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  gap: 15px;
+}
+
+.register-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.register-form-input label {
+  font-size: 14px;
+}
+
+.register-form-input input {
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+
+.register-form-options {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+}
+
+.register-form-bottom-option {
+  display: flex;
+  gap: 8px;
+}
+
+.register-form-top-option {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+}
+
+.register-form-top-option button {
+  padding: 0px 25px 0px 25px;
 }
