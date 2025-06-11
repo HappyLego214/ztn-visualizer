@@ -4,28 +4,37 @@ import uvicorn
 from typing import Annotated
 from fastapi import FastAPI, Form
 from dotenv import load_dotenv
+from contextlib import asynccontextmanager
 from pathlib import Path
+from database import init_models
 from sqlalchemy import text
 from database import engine
 from fastapi.middleware.cors import CORSMiddleware
 
 dotenv_path = Path(__file__).parent.parent / '.env'
-app = FastAPI()
 
 origins = [
     "http://localhost:5174",
 ]
 
+load_dotenv(dotenv_path=dotenv_path)
+TESTTOKEN = os.getenv('TESTING_APIKEY')
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_models()
+    yield
+
+app = FastAPI(lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-load_dotenv(dotenv_path=dotenv_path)
-TESTTOKEN = os.getenv('TESTING_APIKEY')
 
 @app.get("/")
 async def root():

@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from auth.models import Base
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, URL
 from sqlalchemy.ext.asyncio import create_async_engine
@@ -7,16 +8,23 @@ from sqlalchemy.ext.asyncio import create_async_engine
 dotenv_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=dotenv_path)
 
-DB_USERNAME = os.getenv('DB_USERNAME')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
+SP_USERNAME = os.getenv('SP_USERNAME')
+SP_PASSWORD = os.getenv('SP_PASSWORD')
+SP_HOST_URL = os.getenv('SP_HOST_URL')
 
 url_object = URL.create(
     "postgresql+asyncpg",
-    username=f'{DB_USERNAME}',
-    password=f'{DB_PASSWORD}',
-    host="localhost",
+    username=f'{SP_USERNAME}',
+    password=f'{SP_PASSWORD}',
+    host=f'{SP_HOST_URL}',
     port=5432,
-    database="ztn_visualizer_db",
+    database="postgres",
 )
 
 engine = create_async_engine(url_object)
+
+async def init_models():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+    
