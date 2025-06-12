@@ -24,7 +24,7 @@ class APITokens(Base):
     tokenID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     userID: Mapped[UUID] = mapped_column(ForeignKey("users.userID"))
     tokenHash: Mapped[str] = mapped_column(String(250), nullable=False)
-    label: Mapped[str] = mapped_column(String(100), nullable=True)
+    label: Mapped[str] = mapped_column(String(100), nullable=False)
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     lastUse: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -34,7 +34,7 @@ class SyncNetworks(Base):
     __tablename__ = "sync_networks"
     networkID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     tokenID: Mapped[UUID] = mapped_column(ForeignKey("api_tokens.tokenID"))
-    label: Mapped[str] = mapped_column(String(100), nullable=True)
+    label: Mapped[str] = mapped_column(String(100), nullable=False)
     accessControl: Mapped[bool] = mapped_column(server_default=text("false"), nullable=False),
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False) 
@@ -46,7 +46,7 @@ class SyncDevices(Base):
     networkID: Mapped[UUID] = mapped_column(ForeignKey("sync_networks.networkID"))
     authorized: Mapped[bool] = mapped_column(server_default=text("false"), nullable=False)
     address: Mapped[str] = mapped_column(String(50), nullable=False)
-    label: Mapped[str] = mapped_column(String(100), nullable=True)
+    label: Mapped[str] = mapped_column(String(100), nullable=False)
     version: Mapped[str] = mapped_column(String(50), nullable=False)
     managedIP: Mapped[str] = mapped_column(nullable=False)
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
