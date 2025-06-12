@@ -10,7 +10,7 @@ class UserCreate(UserBaseSchema):
     password: str
 
 class UserRead(UserBaseSchema):
-    userID: str
+    userID: UUID
     createdAt: datetime
     updatedAt: datetime
     active: bool
@@ -20,17 +20,17 @@ class UserRead(UserBaseSchema):
 
 class UserUpdate(UserBaseSchema):
     username: str | None = None
+    password: str | None = None
     email: str | None = None
     active: bool | None = None
 
 class APITokenBaseSchema(BaseModel):
     label: str
-    active: bool
 
 class APITokenCreate(APITokenBaseSchema):
     pass
 
-class APITokenRead(BaseModel):
+class APITokenRead(APITokenBaseSchema):
     tokenID: UUID
     userID: UUID
     active: bool
@@ -46,30 +46,33 @@ class APITokenUpdate(APITokenBaseSchema):
     active: bool | None = None
 
 class SyncNetworkSchema(BaseModel):
+    label: str 
+
+class SyncNetworkCreate(SyncNetworkSchema):
+    pass
+
+class SyncNetworkRead(SyncNetworkSchema):
     networkID: UUID
     tokenID: UUID
-    label: str 
     accessControl: bool
     createdAt: datetime
     updatedAt: datetime
     active: bool
 
-class SyncNetworkRead(BaseModel):
-    label: str
-    accessControl: bool
-    active: bool
-
-class SyncNetworkUpdate(BaseModel):
+class SyncNetworkUpdate(SyncNetworkSchema):
     label: str | None = None
     accessControl: bool | None = None
     active: bool | None = None 
 
-class SyncDevice(BaseModel):
+
+class SyncDeviceSchema(BaseModel):
+    label: str
+
+class SyncDeviceRead(SyncDeviceSchema):
     deviceID: UUID
     networkID: UUID
     authorized: bool
     address: str
-    label: str
     version: str
     managedIP: str
     createdAt: datetime
@@ -77,16 +80,8 @@ class SyncDevice(BaseModel):
     lastSeen: datetime | None
     active: bool
 
-class SyncDeviceRead(BaseModel):
-    deviceID: UUID
-    networkID: UUID
-    authorized: bool
-    address: str
-    label: str
-    version: str
-    managedIP: str
-    lastSeen: datetime
-    active: bool
+class SyncDeviceCreate(BaseModel):
+    pass
 
 class SyncDeviceUpdate(BaseModel):
     address: str | None = None
