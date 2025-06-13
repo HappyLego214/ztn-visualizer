@@ -10,6 +10,7 @@ from database import init_models
 from sqlalchemy import text
 from database import engine
 from fastapi.middleware.cors import CORSMiddleware
+from passlib.context import CryptContext
 
 dotenv_path = Path(__file__).parent.parent / '.env'
 
@@ -35,7 +36,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/")
 async def root():
     async with engine.connect() as conn:
@@ -55,10 +55,6 @@ async def root():
 async def login(email: Annotated[str, Form()], password: Annotated[str, Form()]):
     return {"email;": email, "password": password}
 
-
-@app.post("/login/")
-async def register(email: Annotated[str, Form()], password: Annotated[str, Form()]):
-    return {"email;": email, "password": password}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

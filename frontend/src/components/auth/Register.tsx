@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router";
+import { sendRegisterData } from "./authlogic";
 import { useState } from "react";
 
 const Register = () => {
@@ -7,6 +7,17 @@ const Register = () => {
 
   function togglePasswordVisibility() {
     setPasswordVisible((prev) => !prev);
+  }
+
+  async function handleRegisterSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await sendRegisterData(formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -19,10 +30,18 @@ const Register = () => {
         <p>Google</p>
         <p>Github</p>
       </div>
-      <div className="register-form">
+      <form
+        id="register-form"
+        className="register-form"
+        onSubmit={handleRegisterSubmit}
+      >
+        <div className="register-form-input">
+          <label>Username</label>
+          <input name="password" type="text"></input>
+        </div>
         <div className="register-form-input">
           <label>Email Address</label>
-          <input></input>
+          <input name="email" type="text"></input>
         </div>
         <div className="register-form-input">
           <label>Password</label>
@@ -39,7 +58,7 @@ const Register = () => {
               </>
             ) : (
               <>
-                <input name="password" type="password"></input>
+                <input name="confirm-password" type="password"></input>
                 <span
                   onClick={togglePasswordVisibility}
                   className="material-symbols-outlined"
@@ -63,7 +82,7 @@ const Register = () => {
             <Link to="/login">Sign in</Link>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

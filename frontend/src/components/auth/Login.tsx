@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { sendLoginData } from "./authlogic";
-import AuthContainer from "./AuthContainer";
+import { Link } from "react-router";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const Login = () => {
         </div>
         <div className="login-email-subtitle">
           <p>New user?</p>
-          <p>Create an account</p>
+          <Link to="/register">Create an account</Link>
         </div>
       </div>
       <form

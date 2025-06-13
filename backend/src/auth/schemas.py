@@ -59,6 +59,10 @@ class SyncNetworkRead(SyncNetworkSchema):
     updatedAt: datetime
     active: bool
 
+    class Config:
+        orm_mode = True
+
+
 class SyncNetworkUpdate(SyncNetworkSchema):
     label: str | None = None
     accessControl: bool | None = None
@@ -79,6 +83,10 @@ class SyncDeviceRead(SyncDeviceSchema):
     updatedAt: datetime
     lastSeen: datetime | None
     active: bool
+
+    class Config:
+        orm_mode = True
+
 
 class SyncDeviceCreate(BaseModel):
     pass

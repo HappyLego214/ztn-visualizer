@@ -3,6 +3,7 @@ from pathlib import Path
 from auth.models import Base
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, URL
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine
 
 dotenv_path = Path(__file__).parent.parent / '.env'
@@ -22,9 +23,9 @@ url_object = URL.create(
 )
 
 engine = create_async_engine(url_object)
+Session = sessionmaker(engine)
 
 async def init_models():
     async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
     

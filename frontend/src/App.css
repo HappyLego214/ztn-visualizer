@@ -122,6 +122,11 @@ div {
   gap: 5px;
 }
 
+.login-email-subtitle a {
+  color: black;
+  text-decoration: none;
+}
+
 .login-entry {
   display: flex;
   flex-direction: column;
@@ -224,11 +229,23 @@ div {
   color: grey;
 }
 
+.register-entry {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  gap: 15px;
+}
+
 .register-form-container {
   display: grid;
   grid-template-rows: 0.7fr 0.7fr 3fr;
   height: 100%;
   margin: 30px;
+}
+
+.register-form-container a {
+  color: black;
+  text-decoration: none;
 }
 
 .register-title {
@@ -242,13 +259,6 @@ div {
   justify-content: center;
   align-items: center;
   gap: 50px;
-}
-
-.register-form {
-  display: flex;
-  flex-direction: column;
-  padding-top: 15px;
-  gap: 15px;
 }
 
 .register-form-input {
@@ -287,4 +297,10 @@ div {
 
 .register-form-top-option button {
   padding: 0px 25px 0px 25px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

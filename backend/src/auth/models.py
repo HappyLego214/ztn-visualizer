@@ -8,7 +8,7 @@ from typing import Annotated
 class Base(DeclarativeBase):
     pass
 
-class User(Base):
+class UserModel(Base):
     __tablename__ = "users"
     userID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
@@ -17,9 +17,8 @@ class User(Base):
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     active: Mapped[bool] = mapped_column(nullable=False)
-    
 
-class APITokens(Base):
+class APITokenModel(Base):
     __tablename__ = "api_tokens"
     tokenID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     userID: Mapped[UUID] = mapped_column(ForeignKey("users.userID"))
@@ -30,17 +29,17 @@ class APITokens(Base):
     lastUse: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
 
-class SyncNetworks(Base):
+class SyncNetworkModel(Base):
     __tablename__ = "sync_networks"
     networkID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     tokenID: Mapped[UUID] = mapped_column(ForeignKey("api_tokens.tokenID"))
     label: Mapped[str] = mapped_column(String(100), nullable=False)
-    accessControl: Mapped[bool] = mapped_column(server_default=text("false"), nullable=False),
+    accessControl: Mapped[bool] = mapped_column(server_default=text("false"), nullable=False)
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False) 
+    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     active: Mapped[bool] = mapped_column(nullable=False)
 
-class SyncDevices(Base):
+class SyncDeviceModel(Base):
     __tablename__= "sync_devices"
     deviceID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
     networkID: Mapped[UUID] = mapped_column(ForeignKey("sync_networks.networkID"))
@@ -53,4 +52,3 @@ class SyncDevices(Base):
     updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     lastSeen: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
-
