@@ -14,8 +14,8 @@ class UserModel(Base):
     username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     passwordHash: Mapped[str] = mapped_column(String(250), nullable=False)
     email: Mapped[str] = mapped_column(String(250), unique=True, nullable=False) 
-    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))
+    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
 
 class APITokenModel(Base):
@@ -24,8 +24,8 @@ class APITokenModel(Base):
     userID: Mapped[UUID] = mapped_column(ForeignKey("users.userID"))
     tokenHash: Mapped[str] = mapped_column(String(250), nullable=False)
     label: Mapped[str] = mapped_column(String(100), nullable=False)
-    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))
+    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     lastUse: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
 
@@ -35,8 +35,8 @@ class SyncNetworkModel(Base):
     tokenID: Mapped[UUID] = mapped_column(ForeignKey("api_tokens.tokenID"))
     label: Mapped[str] = mapped_column(String(100), nullable=False)
     accessControl: Mapped[bool] = mapped_column(server_default=text("false"), nullable=False)
-    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))
+    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)
 
 class SyncDeviceModel(Base):
@@ -48,7 +48,7 @@ class SyncDeviceModel(Base):
     label: Mapped[str] = mapped_column(String(100), nullable=False)
     version: Mapped[str] = mapped_column(String(50), nullable=False)
     managedIP: Mapped[str] = mapped_column(nullable=False)
-    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))
+    updatedAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     lastSeen: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     active: Mapped[bool] = mapped_column(nullable=False)

@@ -7,7 +7,8 @@ class UserBaseSchema(BaseModel):
     email: str
 
 class UserCreate(UserBaseSchema):
-    password: str
+    hashed_password: str
+    active: bool
 
 class UserRead(UserBaseSchema):
     userID: UUID
@@ -20,7 +21,7 @@ class UserRead(UserBaseSchema):
 
 class UserUpdate(UserBaseSchema):
     username: str | None = None
-    password: str | None = None
+    hashed_password: str | None = None
     email: str | None = None
     active: bool | None = None
 

@@ -37,7 +37,7 @@ const Register = () => {
       >
         <div className="register-form-input">
           <label>Username</label>
-          <input name="password" type="text"></input>
+          <input name="username" type="text"></input>
         </div>
         <div className="register-form-input">
           <label>Email Address</label>
@@ -58,7 +58,7 @@ const Register = () => {
               </>
             ) : (
               <>
-                <input name="confirm-password" type="password"></input>
+                <input name="password" type="password"></input>
                 <span
                   onClick={togglePasswordVisibility}
                   className="material-symbols-outlined"
@@ -71,7 +71,7 @@ const Register = () => {
         </div>
         <div className="register-form-input">
           <label>Confirm Password</label>
-          <input></input>
+          <input name="confirmPassword" type="password"></input>
         </div>
         <div className="register-form-options">
           <div className="register-form-top-option">
