@@ -36,10 +36,6 @@ const Register = () => {
         onSubmit={handleRegisterSubmit}
       >
         <div className="register-form-input">
-          <label>Username</label>
-          <input name="username" type="text"></input>
-        </div>
-        <div className="register-form-input">
           <label>Email Address</label>
           <input name="email" type="text"></input>
         </div>

@@ -11,7 +11,6 @@ class Base(DeclarativeBase):
 class UserModel(Base):
     __tablename__ = "users"
     userID: Mapped[UUID] = mapped_column(primary_key=True, index=True, server_default=text("gen_random_uuid()"))
-    username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     passwordHash: Mapped[str] = mapped_column(String(250), nullable=False)
     email: Mapped[str] = mapped_column(String(250), unique=True, nullable=False) 
     createdAt: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=text("NOW()"))

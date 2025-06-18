@@ -3,7 +3,6 @@ from uuid import UUID
 from datetime import datetime
 
 class UserBaseSchema(BaseModel):
-    username: str
     email: str
 
 class UserCreate(UserBaseSchema):
@@ -20,7 +19,6 @@ class UserRead(UserBaseSchema):
         orm_mode = True
 
 class UserUpdate(UserBaseSchema):
-    username: str | None = None
     hashed_password: str | None = None
     email: str | None = None
     active: bool | None = None

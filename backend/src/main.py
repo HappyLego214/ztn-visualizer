@@ -33,25 +33,18 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 async def check_user_exists(user: UserBaseSchema, async_session: SessionDep):
-    username_statement = select(UserModel).where(UserModel.username == user.username)
     email_statement = select(UserModel).where(UserModel.email == user.email)
-
     email_result = await async_session.scalars(email_statement)
-    username_result = await async_session.scalars(username_statement)
-
+    
     user_email = email_result.first()
-    user_username = username_result.first()
 
-    if user_email is None and user_username is None:
+    if user_email is None:
         return {"status": False, "cause": "User does not exist"}
     elif user_email != None:
-        return {"status": True, "cause": "Email already exists"}
-    else:
-        return {"status": True, "cause": "Username existing"}
+        return {"status": True, "cause": "User already exists"}
     
 async def create_user(user: UserBaseSchema, async_session: SessionDep):
     userToModel = UserModel(
-        username = user.username,
         passwordHash = user.hashed_password,
         email = user.email,
         active = user.active
@@ -95,12 +88,11 @@ async def login(email: Annotated[str, Form()], password: Annotated[str, Form()])
     return {"email;": email, "password": password}
 
 @app.post("/register/")
-async def register(email: Annotated[str, Form()], password: Annotated[str, Form()], username: Annotated[str, Form()], session: SessionDep):
+async def register(email: Annotated[str, Form()], password: Annotated[str, Form()], session: SessionDep):
     
     hashed_password = get_password_hash(password)
     
     user = UserCreate(
-        username = username,
         email = email,
         hashed_password = hashed_password,
         active = True
